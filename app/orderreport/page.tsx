@@ -136,7 +136,7 @@ export default function OrderReport() {
         {/* Summary Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
           <StatCard title="Total Orders" value={totalOrders} icon={<Package size={24}/>} variant="blue" />
-          <StatCard title="Pending" value={pendingOrders} icon={<Clock size={24}/>} variant="yellow" />
+          <StatCard title="Placed" value={pendingOrders} icon={<Clock size={24}/>} variant="yellow" />
           <StatCard title="Delivered" value={deliveredOrders} icon={<CheckCircle2 size={24}/>} variant="green" />
           <StatCard title="Net Revenue" value={totalRevenue} icon={<TrendingUp size={24}/>} variant="orange" isCurrency />
         </div>

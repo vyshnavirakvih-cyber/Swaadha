@@ -127,7 +127,7 @@ export default function OrdersDashboard() {
 
         {/* Status Counts - Redesigned */}
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-          <StatusCard label="Pending" value={counts.pending} icon={<Clock size={20}/>} color="amber" />
+          <StatusCard label="Placed" value={counts.pending} icon={<Clock size={20}/>} color="amber" />
           <StatusCard label="Confirmed" value={counts.confirmed} icon={<Package size={20}/>} color="blue" />
           <StatusCard label="Processing" value={counts.processing} icon={<LayoutDashboard size={20}/>} color="purple" />
           <StatusCard label="Shipping" value={counts.out_for_delivery} icon={<Truck size={20}/>} color="orange" />

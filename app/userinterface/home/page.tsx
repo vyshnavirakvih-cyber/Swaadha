@@ -60,7 +60,7 @@ export default function HomePage() {
         ]);
 
         if (hero.data?.images) setHeroImages(hero.data.images);
-        
+
         setLatestProducts(products.data?.map(p => ({
           ...p,
           price: p.product_variations?.[0]?.price || 0,
@@ -119,18 +119,26 @@ export default function HomePage() {
 
   return (
     <div className="bg-[#FAFAFA] min-h-screen pb-20 overflow-x-hidden">
-      
+
       {/* --- POPUP BANNER --- */}
       {showBanner && banner && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-[100] p-4">
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-[400px] relative overflow-hidden animate-in fade-in zoom-in duration-300">
+
+          <div className="relative bg-white rounded-2xl shadow-2xl overflow-hidden w-auto max-w-[90vw] max-h-[80vh] animate-in fade-in zoom-in duration-300">
+
             <button
               onClick={() => setShowBanner(false)}
-              className="absolute top-3 right-4 z-20 bg-black/40 hover:bg-black/60 text-white w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-md transition-all font-bold text-xl"
+              className="absolute top-2 right-2 z-20 bg-black/50 text-white w-8 h-8 rounded-full flex items-center justify-center"
             >
               &times;
             </button>
-            <img src={banner.image_url} alt="Promotion" className="w-full h-auto max-h-[80vh] object-contain" />
+
+            <img
+              src={banner.image_url}
+              alt="Promotion"
+              className="w-auto h-auto max-w-[90vw] max-h-[50vh] object-contain"
+            />
+
           </div>
         </div>
       )}
@@ -184,7 +192,7 @@ export default function HomePage() {
       {/* --- LATEST PRODUCTS --- */}
       <section className="max-w-[1400px] mx-auto px-6 lg:px-12 mt-16 md:mt-24">
         <div className="flex items-end justify-between mb-10 border-b border-slate-200 pb-6">
-          <h2 className="text-4xl md:text-5xl font-black tracking-tighter">Just Added</h2>
+          <h2 className="text-4xl md:text-5xl font-black tracking-tighter">Latest Added Products</h2>
           <Link href="/userinterface/Gproducts" className="group flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-orange-600 transition-all">
             View All <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
           </Link>
@@ -220,54 +228,54 @@ export default function HomePage() {
       </section>
 
 
-{/* --- BRAND CARDS SECTION --- */}
-<section className="w-full py-24 bg-white">
-  <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-    <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-4">
-      <div className="space-y-2">
-        <div className="flex items-center gap-2 text-orange-600">
-          <Award size={20} />
-          <span className="text-[10px] font-black uppercase tracking-[0.3em]">Premium Quality</span>
+      {/* --- BRAND CARDS SECTION --- */}
+      <section className="w-full py-24 bg-white">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+          <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-4">
+            <div className="space-y-2">
+              <div className="flex items-center gap-2 text-orange-600">
+                <Award size={20} />
+                <span className="text-[10px] font-black uppercase tracking-[0.3em]">Premium Quality</span>
+              </div>
+              <h2 className="text-4xl font-black tracking-tighter">Our Trusted Partners(Brands)</h2>
+            </div>
+            <p className="text-slate-400 text-sm max-w-xs md:text-right italic">
+              Collaborating with brands that share our commitment to natural goodness.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+            {brands.map((brand) => (
+              <Link
+                key={brand.id}
+                href={`/userinterface/Gproducts?brand_id=${brand.id}`} // Link to product page with filter
+                className="group relative bg-[#FAFAFA] border border-slate-100 rounded-2xl p-8 flex flex-col items-center justify-center gap-6 transition-all duration-500 hover:bg-white hover:shadow-[0_20px_50px_rgba(0,0,0,0.05)] hover:-translate-y-2 cursor-pointer"
+              >
+                {/* Status Indicator Dot */}
+                <div className="absolute top-4 right-4 w-1.5 h-1.5 rounded-full bg-slate-200 group-hover:bg-orange-500 transition-colors" />
+
+                <div className="h-16 w-full flex items-center justify-center">
+                  <img
+                    src={brand.image_url}
+                    alt={brand.alt_text}
+                    className="max-h-full max-w-[85%] object-contain transition-all duration-500 ease-in-out group-hover:scale-110"
+                  />
+                </div>
+
+                <div className="text-center space-y-1">
+                  <h3 className="text-[11px] font-black uppercase tracking-widest text-slate-400 group-hover:text-slate-900 transition-colors">
+                    {brand.name_en}
+                  </h3>
+                  <div className="w-0 group-hover:w-full h-[1.5px] bg-orange-600 transition-all duration-500 mx-auto" />
+                </div>
+
+                {/* Decorative Glass Background on Hover */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-orange-50/0 to-orange-50/20 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+              </Link>
+            ))}
+          </div>
         </div>
-        <h2 className="text-4xl font-black tracking-tighter">Our Trusted Partners</h2>
-      </div>
-      <p className="text-slate-400 text-sm max-w-xs md:text-right italic">
-        Collaborating with brands that share our commitment to natural goodness.
-      </p>
-    </div>
-
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-      {brands.map((brand) => (
-        <Link 
-          key={brand.id} 
-          href={`/userinterface/Gproducts?brand_id=${brand.id}`} // Link to product page with filter
-          className="group relative bg-[#FAFAFA] border border-slate-100 rounded-2xl p-8 flex flex-col items-center justify-center gap-6 transition-all duration-500 hover:bg-white hover:shadow-[0_20px_50px_rgba(0,0,0,0.05)] hover:-translate-y-2 cursor-pointer"
-        >
-          {/* Status Indicator Dot */}
-          <div className="absolute top-4 right-4 w-1.5 h-1.5 rounded-full bg-slate-200 group-hover:bg-orange-500 transition-colors" />
-
-          <div className="h-16 w-full flex items-center justify-center">
-            <img
-              src={brand.image_url}
-              alt={brand.alt_text}
-              className="max-h-full max-w-[85%] object-contain transition-all duration-500 ease-in-out group-hover:scale-110"
-            />
-          </div>
-
-          <div className="text-center space-y-1">
-            <h3 className="text-[11px] font-black uppercase tracking-widest text-slate-400 group-hover:text-slate-900 transition-colors">
-              {brand.name_en}
-            </h3>
-            <div className="w-0 group-hover:w-full h-[1.5px] bg-orange-600 transition-all duration-500 mx-auto" />
-          </div>
-
-          {/* Decorative Glass Background on Hover */}
-          <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-orange-50/0 to-orange-50/20 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-        </Link>
-      ))}
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* --- OUR STORY --- */}
       <section className="max-w-[1400px] mx-auto px-6 lg:px-12 py-24 flex flex-col md:flex-row items-center gap-16">

@@ -136,9 +136,9 @@ export default function Header() {
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center gap-10">
               <NavLink href="/userinterface/home" icon={<Home size={20} />} label="Home" />
-              <NavLink href="/userinterface/Gproducts" icon={<Tag size={20} />} label="Products" />
-              <NavLink href="/userinterface/category" icon={<Grid size={20} />} label="Categories" />
-
+             <NavLink href="/userinterface/category" icon={<Grid size={20} />} label="Categories" />
+             <NavLink href="/userinterface/Gproducts" icon={<Tag size={20} />} label="Products" />
+              
               <div className="h-8 w-[1px] bg-slate-200 mx-2" />
 
               <div className="flex items-center gap-6">
